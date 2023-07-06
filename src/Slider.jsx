@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import Dots from "./components/widgets/Slider/components/Controls/Dots";
 
 import SlidesList from "./components/widgets/Slider/components/SlideList";
-import Indicator from "./components/widgets/Slider/components/Controls/Indicator"
+
 
 export const SliderContext = createContext();
 
@@ -15,6 +15,7 @@ const items = [
   { id: 1, title: "For you information" },
   { id: 2, title: ")))))))))" },
 ];
+
 const Slider = function ({ width, height, autoPlay, autoPlayTime }) {
   // const [items, setItems] = useState([]);
   const [slide, setSlide] = useState(0);
@@ -73,19 +74,6 @@ const Slider = function ({ width, height, autoPlay, autoPlayTime }) {
       clearInterval(interval);
     };
   }, [items.length, slide]); // when images uploaded or slide changed manually we start timer
-  // const indicators =
-  // children &&
-  // children.map((_, index ) => {
-  //   return (
-  //     <Indicator
-  //       key={index}
-  //       index={index}
-  //       slide={slide}
-  //       changeSlide={changeSlide}
-  //     ></Indicator>
-  //   );
-  // });
-
 
   return (
     <div
@@ -94,20 +82,19 @@ const Slider = function ({ width, height, autoPlay, autoPlayTime }) {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
     >
-      <SliderContext.Provider
+      {/* <SliderContext.Provider
         value={{
           goToSlide,
           changeSlide,
           slidesCount: items.length,
           slideNumber: slide,
-          currentPosition:slide
-        }}
-      >
+         
+        }} */}
+      {/* > */}
         {/* <Arrows /> */}
-        <SlidesList slideNumber={slide} items={items} />
-        {/* <div className={styles.slideIndicator}>{indicators}</div> */}
-        <Dots />
-      </SliderContext.Provider>
+        <SlidesList slideNumber={slide} items={items}/>
+        <Dots slidesCount={items.length}slideNumber ={slide} goToSlide={goToSlide} />
+      {/* </SliderContext.Provider> */}
     </div>
   );
 };
